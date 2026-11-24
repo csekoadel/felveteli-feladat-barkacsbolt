@@ -1,0 +1,5 @@
+@for (elem of tools(); track elem.id) {
+<p>{{ 'TOOLS.' + elem.name | translate}} - {{elem.stock}}</p>
+} @empty {
+<p>Nincs adat</p>
+}
