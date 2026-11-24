@@ -1,1 +1,3 @@
-export interface StockAddition {}
+export interface StockAddition {
+    quantity: number;
+}

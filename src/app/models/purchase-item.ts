@@ -1,1 +1,4 @@
-export interface PurchaseItem {}
+export interface PurchaseItem {
+    toolId: string;
+    quantity: number;
+}
