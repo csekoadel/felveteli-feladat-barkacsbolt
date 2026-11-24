@@ -1,0 +1,203 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Mock Tool Shop API",
+    "version": "1.0.0",
+    "description": "Development mock. Inventory and generated IDs are kept in memory and reset on restart. Category and tool names are untranslated codes."
+  },
+  "servers": [{ "url": "http://localhost:3000", "description": "Default local server; configurable with PORT" }],
+  "paths": {
+    "/api/categories": {
+      "get": {
+        "operationId": "listCategories",
+        "summary": "List category codes",
+        "responses": {
+          "200": { "description": "Category codes", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Category" } } } } }
+        }
+      }
+    },
+    "/api/tool-names": {
+      "get": {
+        "operationId": "listToolNames",
+        "summary": "List supported tool name codes",
+        "responses": {
+          "200": { "description": "Tool name codes", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/ToolName" } } } } }
+        }
+      }
+    },
+    "/api/tools/grouped": {
+      "get": {
+        "operationId": "listToolsByCategory",
+        "summary": "List catalog tool names grouped by category",
+        "description": "Returns the full catalog, independent of inventory and stock.",
+        "responses": {
+          "200": { "description": "Tool name codes by category", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GroupedCatalog" } } } }
+        }
+      }
+    },
+    "/api/tools": {
+      "get": {
+        "operationId": "listStock",
+        "summary": "List inventory records, including zero-stock items",
+        "responses": {
+          "200": { "description": "Inventory", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Tool" } } } } }
+        }
+      },
+      "post": {
+        "operationId": "createStockItem",
+        "summary": "Create an inventory record from a catalog name and category",
+        "description": "The name must belong to the selected category in the grouped catalog. A separate record is created even when an item with the same name and category exists.",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/NewTool" }, "example": { "name": "PAINT_BRUSH", "category": "PAINTING", "stock": 10 } } } },
+        "responses": {
+          "201": { "description": "Created inventory record", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Tool" } } } },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "413": { "$ref": "#/components/responses/BodyTooLarge" },
+          "415": { "$ref": "#/components/responses/UnsupportedMediaType" }
+        }
+      }
+    },
+    "/api/tools/{id}": {
+      "delete": {
+        "operationId": "deleteStockItem",
+        "summary": "Delete an inventory record with zero stock",
+        "description": "Removes only the specified inventory record; the catalog is unchanged.",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "description": "Inventory ID returned by GET /api/tools", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "204": { "description": "Inventory record deleted" },
+          "404": { "$ref": "#/components/responses/ToolNotFound" },
+          "409": { "description": "The inventory record still has stock", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiError" }, "example": { "error": { "code": "STOCK_NOT_EMPTY", "message": "A tool with stock cannot be deleted.", "details": { "toolId": "inventory-id", "stock": 3 } } } } } }
+        }
+      }
+    },
+    "/api/tools/{id}/stock": {
+      "post": {
+        "operationId": "addStock",
+        "summary": "Increase the stock of an existing inventory record",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "description": "Inventory ID returned by GET /api/tools", "schema": { "type": "string" } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/StockAddition" }, "example": { "quantity": 5 } } } },
+        "responses": {
+          "200": { "description": "Updated inventory record", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Tool" } } } },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/ToolNotFound" },
+          "413": { "$ref": "#/components/responses/BodyTooLarge" },
+          "415": { "$ref": "#/components/responses/UnsupportedMediaType" }
+        }
+      }
+    },
+    "/api/purchases": {
+      "post": {
+        "operationId": "purchase",
+        "summary": "Purchase one or more items",
+        "description": "Duplicate IDs are combined. The purchase is atomic: no stock changes if any item is unknown or has insufficient stock.",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Purchase" }, "example": { "items": [{ "toolId": "inventory-id", "quantity": 2 }] } } } },
+        "responses": {
+          "200": { "description": "Updated inventory records", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PurchaseResult" } } } },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/ToolNotFound" },
+          "409": { "description": "Insufficient stock; error details include toolId, requested, and available", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiError" }, "example": { "error": { "code": "INSUFFICIENT_STOCK", "message": "Not enough stock is available.", "details": { "toolId": "inventory-id", "requested": 5, "available": 3 } } } } } },
+          "413": { "$ref": "#/components/responses/BodyTooLarge" },
+          "415": { "$ref": "#/components/responses/UnsupportedMediaType" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "string",
+        "enum": ["PAINTING", "ROOF_BUILDING", "ELECTRIC", "WATER", "GAS", "GENERAL"]
+      },
+      "ToolName": {
+        "type": "string",
+        "enum": [
+          "PAINT_ROLLER", "PAINT_BRUSH", "PAINT_TRAY", "PAINT_SCRAPER",
+          "ROOFING_HAMMER", "ROOFING_NAILER", "ROOFING_SHOVEL", "ROOFING_HATCHET",
+          "VOLTAGE_TESTER", "WIRE_STRIPPER", "MULTIMETER", "CABLE_CUTTER",
+          "PIPE_WRENCH", "PIPE_CUTTER", "PLUNGER", "BASIN_WRENCH",
+          "GAS_LEAK_DETECTOR", "GAS_PRESSURE_GAUGE", "GAS_PIPE_CUTTER", "GAS_PIPE_WRENCH",
+          "TAPE_MEASURE", "HAMMER", "SCREWDRIVER", "SPIRIT_LEVEL"
+        ]
+      },
+      "GroupedCatalog": {
+        "type": "object",
+        "required": ["PAINTING", "ROOF_BUILDING", "ELECTRIC", "WATER", "GAS", "GENERAL"],
+        "properties": {
+          "PAINTING": { "type": "array", "items": { "$ref": "#/components/schemas/ToolName" } },
+          "ROOF_BUILDING": { "type": "array", "items": { "$ref": "#/components/schemas/ToolName" } },
+          "ELECTRIC": { "type": "array", "items": { "$ref": "#/components/schemas/ToolName" } },
+          "WATER": { "type": "array", "items": { "$ref": "#/components/schemas/ToolName" } },
+          "GAS": { "type": "array", "items": { "$ref": "#/components/schemas/ToolName" } },
+          "GENERAL": { "type": "array", "items": { "$ref": "#/components/schemas/ToolName" } }
+        }
+      },
+      "NewTool": {
+        "type": "object",
+        "required": ["name", "category", "stock"],
+        "properties": {
+          "name": { "$ref": "#/components/schemas/ToolName" },
+          "category": { "$ref": "#/components/schemas/Category" },
+          "stock": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+        }
+      },
+      "Tool": {
+        "allOf": [
+          { "$ref": "#/components/schemas/NewTool" },
+          { "type": "object", "required": ["id"], "properties": { "id": { "type": "string", "format": "uuid" } } }
+        ]
+      },
+      "StockAddition": {
+        "type": "object",
+        "required": ["quantity"],
+        "properties": { "quantity": { "type": "integer", "minimum": 1, "maximum": 9007199254740991, "description": "The resulting stock must also be a safe integer." } }
+      },
+      "Purchase": {
+        "type": "object",
+        "required": ["items"],
+        "properties": {
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["toolId", "quantity"],
+              "properties": {
+                "toolId": { "type": "string", "minLength": 1 },
+                "quantity": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 }
+              }
+            }
+          }
+        }
+      },
+      "PurchaseResult": {
+        "type": "object",
+        "required": ["tools"],
+        "properties": { "tools": { "type": "array", "items": { "$ref": "#/components/schemas/Tool" } } }
+      },
+      "ApiError": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["code", "message"],
+            "properties": {
+              "code": { "type": "string" },
+              "message": { "type": "string" },
+              "details": { "type": "object", "additionalProperties": true }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": { "description": "Invalid JSON or input", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiError" } } } },
+      "ToolNotFound": { "description": "Inventory ID not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiError" } } } },
+      "BodyTooLarge": { "description": "Request body exceeds 64 KiB", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiError" } } } },
+      "UnsupportedMediaType": { "description": "Content-Type must be application/json", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiError" } } } }
+    }
+  }
+}

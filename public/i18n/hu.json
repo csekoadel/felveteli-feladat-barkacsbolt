@@ -1,0 +1,36 @@
+{
+  "CATEGORIES": {
+    "PAINTING": "Festés",
+    "ROOF_BUILDING": "Tetőépítés",
+    "ELECTRIC": "Villanyszerelés",
+    "WATER": "Vízszerelés",
+    "GAS": "Gázszerelés",
+    "GENERAL": "Általános"
+  },
+  "TOOLS": {
+    "PAINT_ROLLER": "Festőhenger",
+    "PAINT_BRUSH": "Ecset",
+    "PAINT_TRAY": "Festőtálca",
+    "PAINT_SCRAPER": "Festékkaparó",
+    "ROOFING_HAMMER": "Tetőfedő kalapács",
+    "ROOFING_NAILER": "Tetőfedő szögbelövő",
+    "ROOFING_SHOVEL": "Tetőbontó lapát",
+    "ROOFING_HATCHET": "Tetőfedő szekerce",
+    "VOLTAGE_TESTER": "Feszültségvizsgáló",
+    "WIRE_STRIPPER": "Csupaszítófogó",
+    "MULTIMETER": "Multiméter",
+    "CABLE_CUTTER": "Kábelvágó",
+    "PIPE_WRENCH": "Csőfogó",
+    "PIPE_CUTTER": "Csővágó",
+    "PLUNGER": "Lefolyópumpa",
+    "BASIN_WRENCH": "Mosdócsapkulcs",
+    "GAS_LEAK_DETECTOR": "Gázszivárgás-érzékelő",
+    "GAS_PRESSURE_GAUGE": "Gáznyomásmérő",
+    "GAS_PIPE_CUTTER": "Gázcsővágó",
+    "GAS_PIPE_WRENCH": "Gázcsőfogó",
+    "TAPE_MEASURE": "Mérőszalag",
+    "HAMMER": "Kalapács",
+    "SCREWDRIVER": "Csavarhúzó",
+    "SPIRIT_LEVEL": "Vízmérték"
+  }
+}
