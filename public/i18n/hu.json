@@ -36,5 +36,12 @@
     "NAVIGATION": {
         "STOCK_LIST": "Raktárkészlet",
         "ADD_TOOL": "Új eszköz"
+    },
+    "ADD_TOOL_PAGE": {
+        "TITLE": "Új eszköz felvétele",
+        "CATEGORY": "Kategória",
+        "SELECT_CATEGORY": "Válassz kategóriát",
+        "TOOL": "Eszköz",
+        "SELECT_TOOL": "Válassz eszközt"
     }
 }

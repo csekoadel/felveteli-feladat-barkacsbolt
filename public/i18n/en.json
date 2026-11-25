@@ -36,5 +36,12 @@
     "NAVIGATION": {
         "STOCK_LIST": "Stock",
         "ADD_TOOL": "Add tool"
+    },
+    "ADD_TOOL_PAGE": {
+        "TITLE": "Add new tool",
+        "CATEGORY": "Category",
+        "SELECT_CATEGORY": "Select a category",
+        "TOOL": "Tool",
+        "SELECT_TOOL": "Select a tool"
     }
 }
