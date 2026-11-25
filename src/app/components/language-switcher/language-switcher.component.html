@@ -1,0 +1,7 @@
+<button type="button" (click)="languageService.setLanguage(Language.HU)" [class.active]="languageService.currentLanguage() === Language.HU">
+  HU
+</button>
+
+<button type="button" (click)="languageService.setLanguage(Language.EN)" [class.active]="languageService.currentLanguage() === Language.EN">
+  EN
+</button>
