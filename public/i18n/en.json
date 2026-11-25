@@ -1,36 +1,40 @@
 {
-  "CATEGORIES": {
-    "PAINTING": "Painting",
-    "ROOF_BUILDING": "Roof building",
-    "ELECTRIC": "Electrical",
-    "WATER": "Plumbing",
-    "GAS": "Gas",
-    "GENERAL": "General"
-  },
-  "TOOLS": {
-    "PAINT_ROLLER": "Paint roller",
-    "PAINT_BRUSH": "Paint brush",
-    "PAINT_TRAY": "Paint tray",
-    "PAINT_SCRAPER": "Paint scraper",
-    "ROOFING_HAMMER": "Roofing hammer",
-    "ROOFING_NAILER": "Roofing nailer",
-    "ROOFING_SHOVEL": "Roofing shovel",
-    "ROOFING_HATCHET": "Roofing hatchet",
-    "VOLTAGE_TESTER": "Voltage tester",
-    "WIRE_STRIPPER": "Wire stripper",
-    "MULTIMETER": "Multimeter",
-    "CABLE_CUTTER": "Cable cutter",
-    "PIPE_WRENCH": "Pipe wrench",
-    "PIPE_CUTTER": "Pipe cutter",
-    "PLUNGER": "Plunger",
-    "BASIN_WRENCH": "Basin wrench",
-    "GAS_LEAK_DETECTOR": "Gas leak detector",
-    "GAS_PRESSURE_GAUGE": "Gas pressure gauge",
-    "GAS_PIPE_CUTTER": "Gas pipe cutter",
-    "GAS_PIPE_WRENCH": "Gas pipe wrench",
-    "TAPE_MEASURE": "Tape measure",
-    "HAMMER": "Hammer",
-    "SCREWDRIVER": "Screwdriver",
-    "SPIRIT_LEVEL": "Spirit level"
-  }
+    "CATEGORIES": {
+        "PAINTING": "Painting",
+        "ROOF_BUILDING": "Roof building",
+        "ELECTRIC": "Electrical",
+        "WATER": "Plumbing",
+        "GAS": "Gas",
+        "GENERAL": "General"
+    },
+    "TOOLS": {
+        "PAINT_ROLLER": "Paint roller",
+        "PAINT_BRUSH": "Paint brush",
+        "PAINT_TRAY": "Paint tray",
+        "PAINT_SCRAPER": "Paint scraper",
+        "ROOFING_HAMMER": "Roofing hammer",
+        "ROOFING_NAILER": "Roofing nailer",
+        "ROOFING_SHOVEL": "Roofing shovel",
+        "ROOFING_HATCHET": "Roofing hatchet",
+        "VOLTAGE_TESTER": "Voltage tester",
+        "WIRE_STRIPPER": "Wire stripper",
+        "MULTIMETER": "Multimeter",
+        "CABLE_CUTTER": "Cable cutter",
+        "PIPE_WRENCH": "Pipe wrench",
+        "PIPE_CUTTER": "Pipe cutter",
+        "PLUNGER": "Plunger",
+        "BASIN_WRENCH": "Basin wrench",
+        "GAS_LEAK_DETECTOR": "Gas leak detector",
+        "GAS_PRESSURE_GAUGE": "Gas pressure gauge",
+        "GAS_PIPE_CUTTER": "Gas pipe cutter",
+        "GAS_PIPE_WRENCH": "Gas pipe wrench",
+        "TAPE_MEASURE": "Tape measure",
+        "HAMMER": "Hammer",
+        "SCREWDRIVER": "Screwdriver",
+        "SPIRIT_LEVEL": "Spirit level"
+    },
+    "NAVIGATION": {
+        "STOCK_LIST": "Stock",
+        "ADD_TOOL": "Add tool"
+    }
 }
