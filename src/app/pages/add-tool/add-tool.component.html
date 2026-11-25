@@ -3,15 +3,22 @@
 <label for="category">{{ 'ADD_TOOL_PAGE.CATEGORY' | translate }}</label>
 <select id="category" (change)="onCategoryChange($event)">
   <option value="">{{ 'ADD_TOOL_PAGE.SELECT_CATEGORY' | translate }}</option>
-  @for (category of  categories; track category) {
+  @for (category of categories; track category) {
     <option [value]="category">{{ 'CATEGORIES.' + category | translate }}</option>
   }
 </select>
 
 <label for="tool">{{ 'ADD_TOOL_PAGE.TOOL' | translate }}</label>
-<select id="tool" [disabled]="!selectedCategory()">
+<select id="tool" [disabled]="!selectedCategory()" (change)="onToolChange($event)">
   <option value="">{{ 'ADD_TOOL_PAGE.SELECT_TOOL' | translate }}</option>
   @for (tool of availableTools(); track tool) {
     <option [value]="tool">{{ 'TOOLS.' + tool | translate }}</option>
   }
 </select>
+
+<label for="quantity">{{ 'ADD_TOOL_PAGE.QUANTITY' | translate }}</label>
+<input id="quantity" type="number" min="1" step="1" [value]="quantity()" (input)="onQuantityChange($event)" />
+
+<button type="button" [disabled]="!canSave()" (click)="save()">{{'ADD_TOOL_PAGE.SAVE'| translate}}</button> @if (message(); as msg){
+<p>{{msg |translate}}
+</p>}

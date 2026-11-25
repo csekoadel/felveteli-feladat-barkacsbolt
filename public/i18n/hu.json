@@ -42,6 +42,12 @@
         "CATEGORY": "Kategória",
         "SELECT_CATEGORY": "Válassz kategóriát",
         "TOOL": "Eszköz",
-        "SELECT_TOOL": "Válassz eszközt"
+        "SELECT_TOOL": "Válassz eszközt",
+        "QUANTITY": "Darabszám",
+        "SAVE": "Mentés",
+        "SUCCESS": "Az eszköz hozzáadva a készlethez."
+    },
+    "ERRORS": {
+        "GENERIC": "Hiba történt, próbáld újra."
     }
 }

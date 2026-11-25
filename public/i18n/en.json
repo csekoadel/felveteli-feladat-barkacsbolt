@@ -42,6 +42,12 @@
         "CATEGORY": "Category",
         "SELECT_CATEGORY": "Select a category",
         "TOOL": "Tool",
-        "SELECT_TOOL": "Select a tool"
+        "SELECT_TOOL": "Select a tool",
+        "QUANTITY": "Quantity",
+        "SAVE": "Save",
+        "SUCCESS": "Tool added to stock."
+    },
+    "ERRORS": {
+        "GENERIC": "Something went wrong, please try again"
     }
 }
