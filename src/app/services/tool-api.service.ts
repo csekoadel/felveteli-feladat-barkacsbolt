@@ -21,4 +21,10 @@ export class ToolApi {
         return this.http.post<Tool>(`${API_BASE_URL}/tools`, newTool);
     }
 
+    addStock(id: string, quantity:number):Observable<Tool>{
+        return this.http.post<Tool>(`${API_BASE_URL}/tools/${id}/stock`, { quantity });
+    }
+    deleteTool(id: string):Observable<void>{
+        return this.http.delete<void>(`${API_BASE_URL}/tools/${id}`);
+    }
 }
