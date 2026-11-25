@@ -1,5 +1,47 @@
-@for (elem of tools(); track elem.id) {
-<p>{{ 'TOOLS.' + elem.name | translate}} - {{elem.stock}}</p>
-} @empty {
-<p>Nincs adat</p>
-}
+ @if (message(); as msg){
+<p>{{msg |translate}}
+</p>}
+<label for="category">{{ 'STOCK_LIST_PAGE.FILTER_CATEGORY' | translate }}</label>
+<select id="category" (change)="onFilterCategoryChange($event)">
+  <option value="">{{ 'STOCK_LIST_PAGE.ALL' | translate }}</option>
+  @for (category of categories; track category) {
+    <option [value]="category">{{ 'CATEGORIES.' + category | translate }}</option>
+  }
+</select>
+<label for="tool">{{ 'STOCK_LIST_PAGE.FILTER_TOOL' | translate }}</label>
+<select id="tool" (change)="onFilterToolChange($event)">
+  <option value="">{{ 'STOCK_LIST_PAGE.ALL' | translate }}</option>
+  @for (tool of toolNames; track tool) {
+    <option [value]="tool">{{ 'TOOLS.' + tool | translate }}</option>
+  }
+</select>
+<table>
+    <thead>
+        <tr>
+            <th>{{ 'STOCK_LIST_PAGE.NAME' |translate}}</th>
+            <th>{{ 'STOCK_LIST_PAGE.CATEGORY' |translate}}</th>
+            <th>{{ 'STOCK_LIST_PAGE.STOCK' |translate}}</th>
+            <th>{{ 'STOCK_LIST_PAGE.ADD_STOCK' |translate}}</th>
+            <th>{{'STOCK_LIST_PAGE.ACTIONS' | translate}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (elem of filteredTools(); track elem.id) {
+        <tr>
+            <td>{{ 'TOOLS.' + elem.name | translate }}</td>
+            <td>{{ 'CATEGORIES.' + elem.category | translate }}</td>
+            <td>{{ elem.stock}}</td>
+            <td>
+                <input #amount type="number" min="1" step="1" value="1" />
+                <button type="button" (click)="increaseStock(elem.id,amount.valueAsNumber)">+</button>
+            </td>
+            <td>
+                <button type="button" [disabled]="elem.stock !== 0" (click)="removeTool(elem.id)">{{'STOCK_LIST_PAGE.DELETE' | translate}}</button>
+            </td>
+        </tr>
+        } @empty {
+        <tr>
+            <td colspan="5">{{'STOCK_LIST_PAGE.EMPTY' | translate }}</td>
+        </tr> }
+    </tbody>
+</table>

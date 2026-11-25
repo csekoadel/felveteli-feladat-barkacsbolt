@@ -48,6 +48,19 @@
         "SUCCESS": "Az eszköz hozzáadva a készlethez."
     },
     "ERRORS": {
-        "GENERIC": "Hiba történt, próbáld újra."
+        "GENERIC": "Hiba történt, próbáld újra.",
+        "STOCK_NOT_EMPTY": "Csak elfogoyott eszköz törölhető"
+    },
+    "STOCK_LIST_PAGE": {
+        "NAME": "Megnevezés",
+        "CATEGORY": "Kategória",
+        "STOCK": "Készlet",
+        "ADD_STOCK": "Készlet növelése",
+        "EMPTY": "Nincs raktáron eszköz",
+        "ACTIONS": "Műveletek",
+        "DELETE": "Törlés",
+        "FILTER_CATEGORY": "Szűrés kategóriára",
+        "FILTER_TOOL": "Szűrés eszközre",
+        "ALL": "Mindegyik"
     }
 }

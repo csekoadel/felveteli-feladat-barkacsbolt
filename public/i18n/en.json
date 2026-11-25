@@ -48,6 +48,19 @@
         "SUCCESS": "Tool added to stock."
     },
     "ERRORS": {
-        "GENERIC": "Something went wrong, please try again"
+        "GENERIC": "Something went wrong, please try again",
+        "STOCK_NOT_EMPTY": "Only out-of stock tools can be delete"
+    },
+    "STOCK_LIST_PAGE": {
+        "NAME": "Name",
+        "CATEGORY": "Category",
+        "STOCK": "Stock",
+        "ADD_STOCK": "Add stock",
+        "EMPTY": "No tools in stock",
+        "ACTIONS": "Actions",
+        "DELETE": "Delete",
+        "FILTER_CATEGORY": "Filter by category",
+        "FILTER_TOOL": "Filter by tool",
+        "ALL": "All"
     }
 }
