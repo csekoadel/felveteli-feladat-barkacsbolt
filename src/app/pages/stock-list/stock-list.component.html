@@ -22,6 +22,7 @@
             <th>{{ 'STOCK_LIST_PAGE.CATEGORY' |translate}}</th>
             <th>{{ 'STOCK_LIST_PAGE.STOCK' |translate}}</th>
             <th>{{ 'STOCK_LIST_PAGE.ADD_STOCK' |translate}}</th>
+            <th>{{ 'STOCK_LIST_PAGE.ADD_TO_CART' | translate }}</th>
             <th>{{'STOCK_LIST_PAGE.ACTIONS' | translate}}</th>
         </tr>
     </thead>
@@ -36,12 +37,18 @@
                 <button type="button" (click)="increaseStock(elem.id,amount.valueAsNumber)">+</button>
             </td>
             <td>
+                <input #cartAmount type="number" min="1" step="1" value="1" [max]="elem.stock" />
+                <button type="button" [disabled]="elem.stock === 0" (click)="addToCart(elem, cartAmount.valueAsNumber)">
+                        {{ 'STOCK_LIST_PAGE.ADD_TO_CART' | translate }}
+                 </button>
+            </td>
+            <td>
                 <button type="button" [disabled]="elem.stock !== 0" (click)="removeTool(elem.id)">{{'STOCK_LIST_PAGE.DELETE' | translate}}</button>
             </td>
         </tr>
         } @empty {
         <tr>
-            <td colspan="5">{{'STOCK_LIST_PAGE.EMPTY' | translate }}</td>
+            <td colspan="6">{{'STOCK_LIST_PAGE.EMPTY' | translate }}</td>
         </tr> }
     </tbody>
 </table>

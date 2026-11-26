@@ -1,10 +1,10 @@
 import { Component, inject, signal,computed } from "@angular/core";
-import { toSignal } from '@angular/core/rxjs-interop';
 import { ToolApi } from "../../services/tool-api.service";
 import { TranslatePipe } from '@ngx-translate/core';
 import { Tool } from "../../models/tool";
 import { ToolName } from "../../enums/tool-name";
 import { Category } from "../../enums/category";
+import { CartService } from "../../services/cart.service";
 
 @Component({
   imports: [TranslatePipe],
@@ -20,6 +20,7 @@ export class StockList {
   protected readonly filterTool = signal<ToolName|null>(null);
   protected readonly categories = Object.values(Category);
   protected readonly toolNames =Object.values(ToolName);
+  protected readonly cartService = inject(CartService);
   constructor() {
   this.loadTools();
 }
@@ -61,6 +62,13 @@ export class StockList {
   protected onFilterToolChange(event:Event):void{
     const value = (event.target as HTMLSelectElement).value;
     this.filterTool.set(value as ToolName);
+  }
+  protected addToCart(tool: Tool, quantity: number): void{
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > tool.stock) {
+      return;
+
+  }
+    this.cartService.add(tool,quantity);
   }
 
 }

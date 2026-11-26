@@ -61,6 +61,7 @@
         "DELETE": "Delete",
         "FILTER_CATEGORY": "Filter by category",
         "FILTER_TOOL": "Filter by tool",
-        "ALL": "All"
+        "ALL": "All",
+        "ADD_TO_CART": "Add to cart"
     }
 }

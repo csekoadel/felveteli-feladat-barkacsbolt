@@ -5,6 +5,9 @@ import { Tool } from "../models/tool";
 import { API_BASE_URL } from "../constants/api-url";
 import { GroupedCatalog } from "../models/grouped-catalog";
 import { NewTool } from "../models/new-tool";
+import { Purchase } from "../models/purchase";
+import { PurchaseItem } from "../models/purchase-item";
+import { PurchaseResult } from "../models/purchase-result";
 
 @Service()
 export class ToolApi {
@@ -26,5 +29,8 @@ export class ToolApi {
     }
     deleteTool(id: string):Observable<void>{
         return this.http.delete<void>(`${API_BASE_URL}/tools/${id}`);
+    }
+    purchase(purchase:Purchase):Observable<PurchaseResult>{
+        return this.http.post<PurchaseResult>(`${API_BASE_URL}/purchases`, purchase);
     }
 }

@@ -61,6 +61,7 @@
         "DELETE": "Törlés",
         "FILTER_CATEGORY": "Szűrés kategóriára",
         "FILTER_TOOL": "Szűrés eszközre",
-        "ALL": "Mindegyik"
+        "ALL": "Mindegyik",
+        "ADD_TO_CART": "Kosárba"
     }
 }
