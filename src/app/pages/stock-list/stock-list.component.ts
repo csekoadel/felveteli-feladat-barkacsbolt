@@ -65,11 +65,17 @@ export class StockList {
     this.filterTool.set(value as ToolName);
   }
   protected addToCart(tool: Tool, quantity: number): void{
-    if (!Number.isInteger(quantity) || quantity < 1 || quantity > tool.stock) {
+    if (!Number.isInteger(quantity) || quantity < 1 ) {
       return;
 
   }
-    this.cartService.add(tool,quantity);
+  const inCart = this.cartService.items().find((item) => item.toolId === tool.id)?.quantity ?? 0;
+  if ( inCart + quantity > tool.stock) {
+    this.message.set('ERRORS.INSUFFICIENT_STOCK');
+    return;
   }
+  this.message.set(null);
+  this.cartService.add(tool, quantity);
+}
 
 }
