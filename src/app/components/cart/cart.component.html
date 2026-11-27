@@ -1,0 +1,15 @@
+<title>{{'CART.TITLE' | translate}}</title>
+@if (message(); as msg){
+<p>{{msg |translate}}
+</p>}
+<ul>
+    @for (item of cartService.items(); track item.toolId) {
+    <li>
+        {{ 'TOOLS.' + item.name| translate }} – {{ item.quantity}}
+        <button type="button" (click)="cartService.remove(item.toolId)">{{ 'CART.REMOVE' | translate }}</button>
+    </li>
+    } @empty {
+    <li>{{ 'CART.EMPTY' | translate }}</li>
+    }
+</ul>
+<button type="button" [disabled]="cartService.items().length === 0" (click)="buy()">{{ 'CART.BUY' | translate }}</button>

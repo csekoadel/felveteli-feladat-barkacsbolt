@@ -49,7 +49,8 @@
     },
     "ERRORS": {
         "GENERIC": "Hiba történt, próbáld újra.",
-        "STOCK_NOT_EMPTY": "Csak elfogoyott eszköz törölhető"
+        "STOCK_NOT_EMPTY": "Csak elfogoyott eszköz törölhető",
+        "INSUFFICIENT_STOCK": "Nincs elég készlet."
     },
     "STOCK_LIST_PAGE": {
         "NAME": "Megnevezés",
@@ -63,5 +64,13 @@
         "FILTER_TOOL": "Szűrés eszközre",
         "ALL": "Mindegyik",
         "ADD_TO_CART": "Kosárba"
+    },
+    "CART": {
+        "TITLE": "Kosár",
+        "EMPTY": "A kosár üres.",
+        "QUANTITY": "Mennyiség",
+        "REMOVE": "Eltávolítás",
+        "BUY": "Vásárlás",
+        "SUCCESS": "Sikeres vásárlás!"
     }
 }

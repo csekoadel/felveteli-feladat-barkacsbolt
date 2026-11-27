@@ -5,9 +5,10 @@ import { Tool } from "../../models/tool";
 import { ToolName } from "../../enums/tool-name";
 import { Category } from "../../enums/category";
 import { CartService } from "../../services/cart.service";
+import { Cart } from '../../components/cart/cart.component';
 
 @Component({
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, Cart],
   selector: "app-stock-list",
   styleUrl: "./stock-list.component.scss",
   templateUrl: "./stock-list.component.html",

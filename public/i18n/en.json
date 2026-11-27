@@ -49,7 +49,8 @@
     },
     "ERRORS": {
         "GENERIC": "Something went wrong, please try again",
-        "STOCK_NOT_EMPTY": "Only out-of stock tools can be delete"
+        "STOCK_NOT_EMPTY": "Only out-of stock tools can be delete",
+        "INSUFFICIENT_STOCK": "Not enough stock."
     },
     "STOCK_LIST_PAGE": {
         "NAME": "Name",
@@ -63,5 +64,13 @@
         "FILTER_TOOL": "Filter by tool",
         "ALL": "All",
         "ADD_TO_CART": "Add to cart"
+    },
+    "CART": {
+        "TITLE": "Cart",
+        "EMPTY": "The cart is empty.",
+        "QUANTITY": "Quantity",
+        "REMOVE": "Remove",
+        "BUY": "Buy",
+        "SUCESS": "Purchase successful!"
     }
 }
